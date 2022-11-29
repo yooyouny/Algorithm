@@ -1,4 +1,4 @@
-package TwoPointer;
+package twopointer;
 
 import java.util.Scanner;
 
@@ -12,6 +12,6 @@ public class Boj_2003 {
 			nums[i] = in.nextInt();
 		}
 
-		
+
 	}
 }
