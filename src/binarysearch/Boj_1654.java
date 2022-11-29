@@ -13,6 +13,9 @@ public class Boj_1654 {
 	static int target;
 	static int N;
 
+	public Boj_1654() {
+	}
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		N = sc.nextInt();
