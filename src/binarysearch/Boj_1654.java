@@ -1,47 +1,41 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package binarysearch;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Boj_1654 {
-	static int[] lines;
-	static int target;
-	static int N;
-
-	public Boj_1654() {
-	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		target = sc.nextInt();
-		lines = new int[N];
+		int N = sc.nextInt();
+		int target = sc.nextInt();
+		int[] lines = new int[N];
 
 		for(int i = 0; i < N; ++i) {
 			lines[i] = sc.nextInt();
 		}
 
 		Arrays.sort(lines);
-		System.out.println(binarySearch(0, lines[N - 1]));
-	}
 
-	private static int binarySearch(int start, int end) {
-		int half = (start + end) / 2;
-		if (start <= end) {
-			int sum = 0;
+		long start = 1;
+		long end = lines[N-1];
+		long result = 0;
 
+		while(start<=end){
+			long half = (start + end ) / 2;
+			long sum = 0;
 			for(int i = 0; i < N; ++i) {
-				if (lines[i] > half) {
-					sum += lines[i] - half;
-				}
+				sum += lines[i] / half;
+			}
+
+			if(sum >= target){
+				start = half + 1;
+				result = half;
+			}else{
+				end = half - 1;
 			}
 		}
-
-		return 0;
+		System.out.println(result);
 	}
+
 }
