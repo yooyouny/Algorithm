@@ -13,6 +13,7 @@ public class Boj_1620 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();
 
 		int n = Integer.parseInt(st.nextToken());
 		int r = Integer.parseInt(st.nextToken());
@@ -21,27 +22,28 @@ public class Boj_1620 {
 		String[] mapped = new String[n + 1];
 
 		for (int i = 1; i <= n; i++) {
-			String input = br.readLine();
-			pocketmon.put(input, i);
-			mapped[i] = input;
+			String name = br.readLine();
+			pocketmon.put(name, i); //키가 이름 값이 도감번호
+			mapped[i] = name;
 		}
 
 		for (int i = 1; i <= r; i++) {
 			String input = br.readLine();
-			if (isNumber(input)) {
-				System.out.println(mapped[i]);
-			} else {
-				System.out.println(pocketmon.get(input));
+			if (isNumber(input)) { // 숫자면 문자
+				sb.append(mapped[Integer.parseInt(input)]);
+			} else { //문자면 숫자가 나와야함
+				sb.append(pocketmon.get(input));
 			}
+			sb.append("\n");
 		}
+		System.out.println(sb.toString());
 	}
 
 	private static boolean isNumber(String input) {
-		for (int i = 0; i < input.length(); i++) {
-			if (!Character.isDigit(input.charAt(i)))
-				return false;
-		}
-		return true;
+		if (Character.isDigit(input.charAt(0)))
+			return true;
+
+		return false;
 	}
 
 }

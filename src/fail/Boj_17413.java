@@ -1,4 +1,4 @@
-package stack;
+package fail;
 
 public class Boj_17413 {
 
