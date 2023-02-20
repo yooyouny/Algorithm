@@ -1,0 +1,9 @@
+SELECT t1.AUTHOR_ID, t2.AUTHOR_NAME, t1.CATEGORY, sum(sales * price) as TOTAL_SALES
+FROM BOOK t1
+LEFT JOIN AUTHOR t2 ON t1.author_id = t2.author_id
+LEFT JOIN BOOK_SALES t3 ON t1.book_id = t3.book_id
+WHERE SALES_DATE like '2022-01%'
+GROUP BY 1, 2, 3
+ORDER BY AUTHOR_ID, CATEGORY desc
+
+
