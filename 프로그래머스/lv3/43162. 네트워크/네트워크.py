@@ -1,19 +1,17 @@
+
 def solution(n, computers):
-    
-    def dfs(com):
-        visited[com] = True
-        
-        for i in range(n):
-            if not visited[i] and computers[com][i] == 1:
-                dfs(i)
-                
-    visited = [False] * (n+1)
     answer = 0
+    visited = [False] * n
     
-    for i in range(n):
-        for j in range(n):
+    def dfs(x):
+        visited[x] = True
+        for i in range(n):
+            if not visited[i] and computers[x][i] == 1:
+                dfs(i)
+    
+    for i in range(len(computers)):
+        for j in range(len(computers)):
             if not visited[i] and computers[i][j] == 1:
                 dfs(i)
                 answer += 1
-
     return answer
