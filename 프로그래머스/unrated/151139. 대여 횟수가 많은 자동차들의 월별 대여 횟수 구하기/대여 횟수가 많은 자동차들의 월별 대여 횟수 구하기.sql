@@ -1,14 +1,11 @@
--- 코드를 입력하세요
-
-SELECT month(START_DATE) as MONTH, CAR_ID, COUNT(HISTORY_ID) as RECORDS
-FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
-WHERE CAR_ID IN (SELECT CAR_ID
-FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
-WHERE START_DATE >= '2022-08-01' and START_DATE < '2022-11-01'
-GROUP BY CAR_ID #해당 기간 동안의 월 별 자동차 ID별 총 대여횟수 리스트 출력
-HAVING COUNT(CAR_ID) >= 5                
-) AND START_DATE >= '2022-08-01' and START_DATE < '2022-11-01'
-GROUP BY MONTH, CAR_ID
-HAVING RECORDS > 0
-ORDER BY MONTH, CAR_ID desc
-
+select month(start_date) as month, car_id, count(*) as records
+from CAR_RENTAL_COMPANY_RENTAL_HISTORY
+where car_id in (select car_id 
+                from CAR_RENTAL_COMPANY_RENTAL_HISTORY
+                where month(start_date) between 8 and 10
+                group by car_id
+                having count(*) >= 5)
+and month(start_date) between 8 and 10
+group by month, car_id
+having records > 0
+order by month, car_id desc
