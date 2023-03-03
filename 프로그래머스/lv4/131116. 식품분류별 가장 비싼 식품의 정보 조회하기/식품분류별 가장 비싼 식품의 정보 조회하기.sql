@@ -11,5 +11,4 @@ where PRICE in (select max(PRICE)
                 from FOOD_PRODUCT
                 group by category)
 AND CATEGORY in ('과자', '국', '김치', '식용유')
-order by price desc 
-        
+order by price desc
