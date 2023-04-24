@@ -1,7 +1,7 @@
 import java.util.*;
 class Solution {
     public int[] solution(int n) {
-        int size = (n+1) * n / 2;
+        int size = (n+1) * n / 2; 
         int[] answer = new int[size];
         int idx = 0;
         int[][] snail = new int[n][n];
