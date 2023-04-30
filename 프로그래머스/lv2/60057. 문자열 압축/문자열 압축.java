@@ -8,7 +8,7 @@ class Solution {
             int cnt = 1;
             
             for(int j=i; j<s.length(); j+=i){
-                if(j+i <= s.length() && pattern.equals(s.substring(j, j+i))){
+                if(pattern.equals(s.substring(j, Math.min(j+i, s.length())))){
                     cnt++;
                 }else{
                     if(cnt > 1) sb.append(cnt);
