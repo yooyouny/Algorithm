@@ -1,14 +1,11 @@
 class Solution {
     public int[] solution(long n) {
-        
-        StringBuilder sb = new StringBuilder(String.valueOf(n));
-        String[] result = sb.reverse().toString().split("");
-        int[] answer = new int[result.length];
-        
-        for(int i=0; i<answer.length; i++){
-            answer[i] = Integer.parseInt(result[i]);
+        String number = String.valueOf(n);
+        int[] digits = new int[number.length()];
+        for (int i = 0; i < digits.length; i++) {
+            digits[i] = (int)(n % 10);
+            n /= 10;
         }
-        
-        return answer;
+        return digits;
     }
 }
