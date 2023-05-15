@@ -3,9 +3,11 @@ class Solution {
     Set<Integer> set;
     public void comb(char[] numbers, boolean[] visited, StringBuilder sb){
         if(sb.length() > 0){
-            set.add(Integer.parseInt(sb.toString()));
+            int checkNum = Integer.parseInt(sb.toString());
+            if(isPrime(checkNum) && !set.contains(checkNum))
+                set.add(checkNum);
         }
-            
+
         for(int i=0; i<numbers.length; i++){
             if(!visited[i]){
                 visited[i] = true;
@@ -18,8 +20,8 @@ class Solution {
     }
     public boolean isPrime(int n){
         if(n < 2) return false;
-        
-        for(int i=2; i<=Math.sqrt(n); i++){
+
+        for(int i=2; i<=n/2; i++){
             if(n % i == 0)
                 return false;
         }
@@ -30,10 +32,6 @@ class Solution {
         int cnt = 0;
         set= new HashSet<>();
         comb(numbers.toCharArray(), new boolean[numbers.length()], new StringBuilder());
-        for(int n : set){
-            if(isPrime(n))
-                cnt++;
-        }
-        return cnt;
+        return set.size();
     }
 }
