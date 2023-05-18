@@ -1,45 +1,43 @@
 import java.util.*;
 class Solution {
-    private long calculate(long first, long second, String op) {
-        return switch (op) {
-            case "+" -> first + second;
-            case "-" -> first - second;
-            case "*" -> first * second;
-            default -> 0;
-        };
-    }
-    private long calculate(List<String> inputList, String[] operator){
-        for(String op : operator){
-            for(int i=0; i<inputList.size(); i++){
-                if(op.equals(inputList.get(i))){
-                    long first = Long.parseLong(inputList.get(i - 1));
-                    long second = Long.parseLong(inputList.get(i + 1));
-                    inputList.remove(i-1);
-                    inputList.remove(i-1);
-                    inputList.remove(i-1);
-                    inputList.add(i-1, String.valueOf(calculate(first, second, op)));
-                    i -= 2;
-                }
+    long answer;
+    public void comb(char[] operator, boolean[] visited, StringBuilder sb, String expression){
+        if(sb.length() == operator.length){
+          calculator(sb.toString(), expression);
+        }
+        for(int i=0; i<operator.length; i++){
+            if(!visited[i]){
+                visited[i] = true;
+                sb.append(operator[i]);
+                comb(operator, visited, sb, expression);
+                visited[i] = false;
+                sb.deleteCharAt(sb.length() - 1);
             }
         }
-        return Long.parseLong(inputList.get(0));
+    }
+    private void calculator(String operator, String expression){
+
     }
     public long solution(String expression) {
-        String[][] operators  = {{"+","-","*"},{"+","*","-"},
-                                {"-","+","*"},{"-","*","+"},
-                                {"*","+","-"},{"*","-","+"}};
+        String operator = "";
+        boolean[] chk = new boolean[3];
         
-        StringTokenizer st = new StringTokenizer(expression, "+-*", true);
-        List<String> inputList = new ArrayList<>();
-        while (st.hasMoreTokens()) {
-            inputList.add(st.nextToken());
+        char[] input = expression.toCharArray();
+        for(char ch : input){
+            if(!chk[0] && ch == '+'){
+                chk[0] = true;
+                operator += ch;
+            }
+            if(!chk[1] && ch == '-'){
+                chk[1] = true;
+                operator += ch;
+            }
+            if(!chk[2] && ch == '*'){
+                chk[2] = true;
+                operator += ch;
+            }
         }
-        
-        long answer = 0;
-        for(String operator[] : operators){
-            answer = Math.max(answer, Math.abs(calculate(new ArrayList<>(inputList), operator)));
-        }
-        
+        comb(operator.toCharArray(), new boolean[operator.length()], new StringBuilder(), expression);
         return answer;
     }
 }
