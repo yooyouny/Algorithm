@@ -5,9 +5,7 @@ class Solution {
         String[] arr = Arrays.stream(numbers)
                 .mapToObj(String::valueOf)
                 .sorted((s1, s2) -> {
-                    int original = Integer.parseInt(s1 + s2);
-                    int reversed = Integer.parseInt(s2 + s1);
-                    return reversed - original;
+                    return (s2+s1).compareTo(s1+s2);
                 })
                 .toArray(String[]::new);
         
