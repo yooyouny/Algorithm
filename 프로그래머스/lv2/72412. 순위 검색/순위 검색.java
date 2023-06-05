@@ -48,7 +48,9 @@ public class Solution {
     }
 
     private int count(String query, Map<String, List<Integer>> scoresMap) {
-        String[] tokens = query.split(" (and )?");
+        String[] tokens = Arrays.stream(query.split(" "))
+                                .filter(data -> !data.equals("and"))
+                                .toArray(String[]::new);
         String key = String.join("", Arrays.copyOf(tokens, tokens.length - 1));
 
         if (!scoresMap.containsKey(key)) return 0;
