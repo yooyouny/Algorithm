@@ -20,18 +20,18 @@ class Solution {
         Arrays.sort(rocks);
         
         int start = 1;
-        int end = distance+1;
+        int end = distance;
         
-        while(start<end-1){
+        while(start<=end){
             int mid = (start + end) / 2;
             
             if(isValid(mid, rocks, n)){
-                start = mid;
+                start = mid+1;
             }else{
-                end = mid;
+                end = mid-1;
             }
         }
         
-        return start;
+        return end;
     }
 }
