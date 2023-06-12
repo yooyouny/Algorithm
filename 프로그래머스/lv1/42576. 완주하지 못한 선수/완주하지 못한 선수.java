@@ -1,16 +1,14 @@
 import java.util.*;
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        String answer = "";
-        Map<String, Integer> passer = new HashMap<>();
-        for(String people : participant) passer.put(people, passer.getOrDefault(people, 0) + 1);
-        for(String people : completion) passer.put(people, passer.getOrDefault(people, 0) - 1);
+        Arrays.sort(participant);
+        Arrays.sort(completion);
         
-        for(String key : passer.keySet()){
-            if(passer.get(key) != 0)
-                answer = key;
+        for(int i=0; i<completion.length; i++){
+            if(!participant[i].equals(completion[i]))
+                return participant[i];
         }
         
-        return answer;
+        return participant[participant.length - 1];
     }
 }
