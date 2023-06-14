@@ -1,20 +1,16 @@
 import java.util.*;
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
         Stack<Character> stack = new Stack<>();
-        stack.push(s.charAt(0));
         
-        for(int i=1; i<s.length(); i++){
-            char bracket = s.charAt(i);
-            if(bracket == '(')
-                stack.push('(');
+        for(char ch : s.toCharArray()){
+            if(ch == '(') stack.push(ch);
             else{
-                if(!stack.isEmpty())
-                    stack.pop();
+                if(stack.isEmpty()) return false;
+                stack.pop();
             }
         }
         
-        return stack.isEmpty() ? true : false;
+        return stack.isEmpty();
     }
 }
