@@ -14,14 +14,14 @@ class Solution {
 
         for(int i=0; i<discount.length; i++){
             int day = 0;
-            int[] initNumber = Arrays.copyOf(number, number.length);
+            int[] initNumber = Arrays.copyOf(number, number.length); // copyOf써야 초깃값 유지한채로 복사됨 
             
             for(int j=i; j<=Math.min(i+9, discount.length-1); j++){
                 if(isWant(discount[j], want, initNumber)){
                     day++;
                 }
             }
-            if(day == 10 && Arrays.stream(initNumber).sum() == 0) {
+            if(day == 10) {
                 answer++;
             }
 
