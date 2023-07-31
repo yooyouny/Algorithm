@@ -1,40 +1,35 @@
 import java.util.*;
 class Solution {
-    class Word{
-        String word;
-        int cnt;
-        public Word(String word, int cnt){
-            this.word = word;
-            this.cnt = cnt;
-        }
-    }
+    static int answer;
     public int solution(String begin, String target, String[] words) {
-        Queue<Word> queue = new LinkedList<>();
-        boolean[] visited = new boolean[words.length];
-        queue.offer(new Word(begin, 0));
+        if(Arrays.stream(words).noneMatch(word -> word.equals(target))) return 0;
         
-        while(!queue.isEmpty()){
-            Word element = queue.poll();
-            
-            if(target.equals(element.word))
-                return element.cnt;
-            
-            for(int i=0; i<words.length; i++){
-                if(!visited[i] && isConvertable(element.word, words[i])){
-                    visited[i] = true;
-                    queue.offer(new Word(words[i], element.cnt + 1));
-                }
-            }
+        boolean[] visited = new boolean[words.length];
+        dfs(begin, target, words, visited, 0);
+        
+        return answer;
+    }
+    private void dfs(String begin, String target, String[] words, boolean[] visited, int cnt){
+        if(begin.equals(target)){
+            answer = cnt;
+            return;
         }
         
-        return 0;
+        for(int i=0; i<words.length; i++){
+            if(visited[i]) continue;
+            if(!isConvertable(begin, words[i])) continue;
+            
+            visited[i] = true;
+            dfs(words[i], target, words, visited, cnt + 1);
+            visited[i] = false;
+        }
     }
-    private boolean isConvertable(String start, String end){
+    private boolean isConvertable(String from, String to){
         int cnt = 0;
-        char[] from = start.toCharArray();
-        char[] to = end.toCharArray();
-        for(int i=0; i<from.length; i++){
-            if(from[i] != to[i]) cnt++;
+        char[] fromArr = from.toCharArray();
+        char[] toArr = to.toCharArray();
+        for(int i=0; i<fromArr.length; i++){
+            if(fromArr[i] != toArr[i]) cnt++;
         }
         return cnt == 1;
     }
