@@ -43,9 +43,8 @@ class Solution {
                     int parentIdx2 = find(getTableIdx(r2, c2));// 두번째 좌표의 부모 인덱스 값
                     if(parentIdx1 == parentIdx2) continue; // 이미 병합된 그룹이면 제외
                     String changeStr = table[parentIdx1].length() == 0 ? table[parentIdx2] : table[parentIdx1];// 두 셀 중 하나의 셀만 값이 있는 경우
-                    table[parentIdx1] = "";
-                    table[parentIdx2] = "";
                     union(parentIdx1, parentIdx2);// 병합
+                    table[parentIdx2] = "";
                     table[parentIdx1] = changeStr;
                 }
                 case "UNMERGE" -> {
