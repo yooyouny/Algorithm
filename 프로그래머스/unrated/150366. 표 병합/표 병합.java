@@ -85,7 +85,7 @@ class Solution {
         if(parent[n] == n){// 자기 자신이 부모인 경우
             return n;
         }
-        return parent[n] = find(parent[n]);// 다른 집합에 속해있는 경우면 해당 집합의 부모 찾기
+        return find(parent[n]);// 다른 집합에 속해있는 경우면 해당 집합의 부모 찾기
     }
     private void union(int a, int b){// 같은 집합인 경우 작은 숫자로 부모를 변경
         a = find(a);
