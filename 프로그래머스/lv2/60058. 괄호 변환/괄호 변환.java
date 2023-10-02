@@ -18,11 +18,11 @@ class Solution {
                 cnt--;
             if(cnt < 0) return false;
         }
-        return true;
+        return cnt == 0;
     }
     private String toBalnacedString(String w){
         
-        if(w.length() == 0) return "";
+        if(w.isBlank()) return "";
         
         StringBuilder u = new StringBuilder();
         StringBuilder v = new StringBuilder();
