@@ -8,7 +8,7 @@ class Solution {
         R = board.length;
         C = board[0].length();
         char[][] map = new char[R][C];
-        boolean[][][] visited = new boolean[R][C][4];
+        boolean[][] visited = new boolean[R][C];
         int startR = 0;
         int startC = 0;
         
@@ -32,7 +32,6 @@ class Solution {
             int m = before[2];
             if(map[r][c] == 'G'){
                 answer = Math.min(answer, m);
-                //System.out.println(r + " "+ c + " " + m);
                 break;
             }
             for(int i=0; i<4; i++){
@@ -40,50 +39,19 @@ class Solution {
                 int nc = c + dc[i];
                 if(nr >= R || nc >= C || nr < 0 || nc < 0) continue;
                 if(map[nr][nc] == 'D') continue;
-                int[] newPoint = movePoint(map, nr, nc, i, R, C);
-                nr = newPoint[0];
-                nc = newPoint[1];
-                if(visited[nr][nc][i]) continue;
-                visited[nr][nc][i] = true;
+                //int[] newPoint = movePoint(map, nr, nc, i, R, C);
+                while(nr >= 0 && nr < R && nc >= 0 && nc < C && map[nr][nc] != 'D') {
+                    nr += dr[i];
+                    nc += dc[i];
+                }
+                nr -= dr[i];
+                nc -= dc[i];
+                
+                if(visited[nr][nc]) continue;
+                visited[nr][nc] = true;
                 queue.add(new int[]{nr, nc, m+1});
             }   
         }
         return answer == Integer.MAX_VALUE ? -1 : answer;
-    }
-    private int[] movePoint(char[][] board, int r, int c, int d, int R, int C){
-        int[] point = new int[2];
-        point[0] = r;
-        point[1] = c; 
-        switch(d){
-            case 0 -> {
-                for(int i = r; i>=0; i--){
-                    if(board[i][c] == 'D') return point;
-                    point[0] = i;
-                    point[1] = c;
-                }
-            }
-            case 1 -> {
-                for(int i = r; i<R; i++){
-                    if(board[i][c] == 'D') return point;
-                    point[0] = i;
-                    point[1] = c;
-                }
-            }
-            case 2 -> {
-                for(int i = c; i >= 0; i--){
-                    if(board[r][i] == 'D') return point;
-                    point[0] = r;
-                    point[1] = i;
-                }
-            }
-            case 3 -> {
-                for(int i = c; i < C; i++){
-                    if(board[r][i] == 'D') return point;
-                    point[0] = r;
-                    point[1] = i;
-                }
-            }
-        }
-        return point;
     }
 }
