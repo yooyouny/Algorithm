@@ -35,11 +35,9 @@ class Solution {
             int b = (size - 1) + ranges[i][1];
             
             if (b > a) {
-                answer[i] = Double.parseDouble(String.format("%.1f", sum[b] - sum[a]));
-            } else if (a > b) {
+                answer[i] = sum[b] - sum[a];
+            } else if(a > b){
                 answer[i] = -1.0;
-            } else {
-                answer[i] = 0.0;
             }
         }
 
